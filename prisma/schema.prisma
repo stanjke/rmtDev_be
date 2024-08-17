@@ -13,54 +13,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum RentalStatus {
-  ACTIVE
-  RETURNED
-}
-
-model Course {
+model User {
   id Int @id @default(autoincrement())
-  title String
-  description String?
-  createdAt DateTime @default(now())
-  startDate DateTime
-  endDate DateTime
-  instructors Instructor[] @relation("InstructorsCourse")
-  assignments Assignment[] @relation("AssignmentsCourse")
-  students Student[] @relation("StudentsCourse")
-}
-
-model Instructor {
-  id Int @id @default(autoincrement())
-  name String
   email String @unique
-  experience Int
-  courses Course[] @relation("InstructorsCourse")
-
-}
-
-model Student {
-  id Int @id @default(autoincrement())
-  name String
-  surname String
-  email String @unique
-  enrollmentDate DateTime
-  courses Course[] @relation("StudentsCourse")
-}
-
-model Assignment {
-  id Int @id @default(autoincrement())
-  courses Course[] @relation("AssignmentsCourse")
-}
-
-model Submission {
-
-}
-
-model Certificate {
-
-}
-
-model Specialization {
-
+  hash String
+  salt String
 }
